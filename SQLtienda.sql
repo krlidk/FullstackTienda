@@ -1,0 +1,1 @@
+CREATE DATABASE db_ecomarket_tienda;db_ecomarket_tienda
