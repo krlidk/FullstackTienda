@@ -3,8 +3,6 @@ package com.ecomarket.tienda.Model;
 
 import java.util.List;
 
-import com.ecomarket.tienda.Model.Pedido;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,9 +32,6 @@ public class Tienda {
 
     @Column(nullable = false)
     private String direccionTienda;
-    
-    @Column(nullable = false)
-    private String direccion;
 
     @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reporte> reportes;
