@@ -2,6 +2,8 @@ package com.ecomarket.tienda.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,8 +33,8 @@ public class Producto {
     @Column(nullable = false)
     private Double precioProducto;
 
-
     @ManyToMany(mappedBy = "productos")
+    @JsonIgnore
     private List<Pedido> pedidos;
     // Relación con la entidad Pedido
 }
