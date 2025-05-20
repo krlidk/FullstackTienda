@@ -24,7 +24,12 @@ public class TiendaController {
     @GetMapping
     public ResponseEntity<List<String>> mostrarMetodos() {
         List<String> metodos = List.of(
-                "aca se supone que van los metodos pero no tengo ninguno XD");
+                "GET http://localhost:8080/api/v1/tienda/mostrarTiendas",
+                "GET http://localhost:8080/api/v1/tienda/buscarId/{id}",
+                "GET http://localhost:8080/api/v1/tienda/buscarNombre/{nombre}",
+                "GET http://localhost:8080/api/v1/tienda/buscarDireccion/{direccion}",
+                "GET http://localhost:8080/api/v1/tienda/verPedidos/{id}",
+                "GET http://localhost:8080/api/v1/tienda/verReportes/{id}");
 
         return ResponseEntity.ok(metodos);
     }
