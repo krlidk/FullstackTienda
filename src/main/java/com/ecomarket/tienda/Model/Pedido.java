@@ -37,7 +37,7 @@ public class Pedido {
     @Column(nullable = false)
     private String estadoPedido; // "Pendiente", "Enviado", "Entregado"
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double totalPedido;
 
     @ManyToMany
