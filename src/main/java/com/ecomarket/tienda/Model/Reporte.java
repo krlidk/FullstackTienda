@@ -1,5 +1,9 @@
 package com.ecomarket.tienda.Model;
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,8 +40,10 @@ private String descripcionReporte;
 @Column(nullable = false)
 private String fechaReporte;
 
+
+@JsonIgnoreProperties
 @ManyToOne
-@JoinColumn(name = "idTienda", nullable = false)
+@JoinColumn(name = "id_tienda", nullable = false)
 private Tienda tienda;
 // Relación con la entidad Tienda
 }

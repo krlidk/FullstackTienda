@@ -3,7 +3,8 @@ package com.ecomarket.tienda.Model;
 
 import java.util.List;
 
-import com.ecomarket.tienda.Model.Pedido;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +28,7 @@ public class Tienda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTIenda;
+    private Integer id_tienda;
 
     @Column(nullable = false)
     private String nombreTienda;
@@ -35,9 +36,8 @@ public class Tienda {
     @Column(nullable = false)
     private String direccionTienda;
     
-    @Column(nullable = false)
-    private String direccion;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reporte> reportes;
     // Relación con la entidad Reporte
@@ -45,4 +45,7 @@ public class Tienda {
     @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos; 
     // Relación con la entidad Pedido
+
+
+    
 }
