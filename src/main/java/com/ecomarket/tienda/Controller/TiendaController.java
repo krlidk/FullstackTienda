@@ -1,6 +1,7 @@
 package com.ecomarket.tienda.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ecomarket.tienda.Model.Pedido;
 import com.ecomarket.tienda.Model.Tienda;
@@ -9,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ecomarket.tienda.Service.TiendaService;
 
@@ -24,16 +29,31 @@ public class TiendaController {
     @GetMapping
     public ResponseEntity<List<String>> mostrarMetodos() {
         List<String> metodos = List.of(
-                "GET http://localhost:8080/api/v1/tienda/mostrarTiendas",
-                "GET http://localhost:8080/api/v1/tienda/buscarId/{id}",
-                "GET http://localhost:8080/api/v1/tienda/buscarNombre/{nombre}",
-                "GET http://localhost:8080/api/v1/tienda/buscarDireccion/{direccion}",
-                "GET http://localhost:8080/api/v1/tienda/verPedidos/{id}",
-                "GET http://localhost:8080/api/v1/tienda/verReportes/{id}");
+                "GET    http://localhost:8080/api/v1/tienda/mostrarTiendas",
+                "GET    http://localhost:8080/api/v1/tienda/buscarId/{id}",
+                "GET    http://localhost:8080/api/v1/tienda/buscarNombre/{nombre}",
+                "GET    http://localhost:8080/api/v1/tienda/buscarDireccion/{direccion}",
+                "GET    http://localhost:8080/api/v1/tienda/verPedidos/{id}",
+                "GET    http://localhost:8080/api/v1/tienda/verReportes/{id}",
+                "DELETE http://localhost:8080/api/v1/tienda/borrar/{id}"
+                );
 
         return ResponseEntity.ok(metodos);
     }
 
+    //Guardar tienda
+    @PostMapping("/guardar")
+    public ResponseEntity<?> guardarTienda(@RequestBody Tienda tienda){
+        Tienda tiendaGuardada = tiendaService.guardarTienda(tienda);
+        return ResponseEntity.ok(tiendaGuardada);
+
+    }   
+    //Actualizar informacion de tienda
+    @PutMapping("modificar/{id}")
+    public ResponseEntity<?> actualizarTienda(@PathVariable int id,@RequestBody Map<String, Object>dato ){
+        Tienda tienda = tiendaService.actualizarTienda(id, dato);
+        return ResponseEntity.ok(tienda);
+    }
     // Mostrar todas las tiendas
     @GetMapping("/mostrarTiendas")
     public ResponseEntity<?> mostrarTiendas() {
@@ -43,6 +63,14 @@ public class TiendaController {
         }
 
         return ResponseEntity.ok(tiendas);
+    }
+
+    //Eliminar por id
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<?> eliminarProducto(@PathVariable Integer id){
+        tiendaService.Eliminar(id);
+
+        return ResponseEntity.ok().body("producto eliminado");
     }
 
     // buscar por id
