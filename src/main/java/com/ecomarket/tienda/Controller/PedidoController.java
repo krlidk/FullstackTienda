@@ -54,10 +54,17 @@ public class PedidoController {
         return ResponseEntity.ok(pedidos);
     }
 
-    //Ingresa un pedido nuevo se completa el totalPedido
-    //NO FUNCA
+    //Ingresa un pedido nuevo se completa el totalPedido y no hay que poner id en el body
     @PostMapping("/ingresar")
     public ResponseEntity<Pedido> crearPedido(@RequestBody Pedido pedido) {
+        // Si el pedido trae un idPedido, verificar si ya existe
+        if (pedido.getIdPedido() != null) {
+            Pedido existente = pedidoService.buscarPedido(pedido.getIdPedido());
+            if (existente != null) {
+                // Ya existe un pedido con ese id, no se permite modificar
+                return ResponseEntity.status(409).build(); // 409 Conflict
+            }
+        }
         // Calcular el total antes de guardar
         Double total = pedidoService.calcularTotalPedido(pedido);
         pedido.setTotalPedido(total);
