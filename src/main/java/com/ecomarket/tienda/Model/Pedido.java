@@ -41,11 +41,7 @@ public class Pedido {
     private Double totalPedido;
 
     @ManyToMany
-    @JoinTable(
-        name = "pedido_producto",
-        joinColumns = @JoinColumn(name = "idPedido"),
-        inverseJoinColumns = @JoinColumn(name = "idProducto")
-        )
+    @JoinTable(name = "pedido_producto", joinColumns = @JoinColumn(name = "idPedido"), inverseJoinColumns = @JoinColumn(name = "idProducto"))
     private List<Producto> productos;
     // Relación con la entidad Producto
 

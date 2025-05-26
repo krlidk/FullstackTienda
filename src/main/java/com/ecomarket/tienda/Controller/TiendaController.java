@@ -26,6 +26,7 @@ public class TiendaController {
     @Autowired
     TiendaService tiendaService;
 
+    // Mostrar metodos disponibles
     @GetMapping
     public ResponseEntity<List<String>> mostrarMetodos() {
         List<String> metodos = List.of(
@@ -37,25 +38,24 @@ public class TiendaController {
                 "GET    http://localhost:8080/api/v1/tienda/verReportes/{id}",
                 "POST   http://localhost:8080/api/v1/tienda/guardar",
                 "PUT    http://localhost:8080/api/v1/tienda/modificar/{id}",
-                "DELETE http://localhost:8080/api/v1/tienda/borrar/{id}"
-                );
-
+                "DELETE http://localhost:8080/api/v1/tienda/borrar/{id}");
         return ResponseEntity.ok(metodos);
     }
 
-    //Guardar tienda
+    // Guardar tienda
     @PostMapping("/guardar")
-    public ResponseEntity<?> guardarTienda(@RequestBody Tienda tienda){
+    public ResponseEntity<?> guardarTienda(@RequestBody Tienda tienda) {
         Tienda tiendaGuardada = tiendaService.guardarTienda(tienda);
         return ResponseEntity.ok(tiendaGuardada);
+    }
 
-    }   
-    //Actualizar informacion de tienda
+    // Actualizar informacion de tienda
     @PutMapping("modificar/{id}")
-    public ResponseEntity<?> actualizarTienda(@PathVariable int id,@RequestBody Map<String, Object>dato ){
+    public ResponseEntity<?> actualizarTienda(@PathVariable int id, @RequestBody Map<String, Object> dato) {
         Tienda tienda = tiendaService.actualizarTienda(id, dato);
         return ResponseEntity.ok(tienda);
     }
+
     // Mostrar todas las tiendas
     @GetMapping("/mostrarTiendas")
     public ResponseEntity<?> mostrarTiendas() {
@@ -63,16 +63,14 @@ public class TiendaController {
         if (tiendas.isEmpty()) {
             return ResponseEntity.badRequest().body("No hay tiendas agregadas");
         }
-
         return ResponseEntity.ok(tiendas);
     }
 
-    //Eliminar por id
+    // Eliminar por id
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> eliminarProducto(@PathVariable Integer id){
+    public ResponseEntity<?> eliminarProducto(@PathVariable Integer id) {
         tiendaService.Eliminar(id);
-
-        return ResponseEntity.ok().body("producto eliminado");
+        return ResponseEntity.ok().body("tienda eliminada correctamente");
     }
 
     // buscar por id
@@ -82,7 +80,6 @@ public class TiendaController {
             return ResponseEntity.badRequest().body("Ingresa un id valido para realizar la busqueda");
         }
         Tienda tienda = tiendaService.buscarTiendaId(id);
-
         return ResponseEntity.ok(tienda);
     }
 
@@ -124,10 +121,10 @@ public class TiendaController {
         if (pedidos.isEmpty()) {
             return ResponseEntity.badRequest().body("Esta tienda no tiene ningun pedido");
         }
-
         return ResponseEntity.ok(pedidos);
     }
 
+    // ver reportes de tienda por su id
     @GetMapping("/verReportes/{id}")
     public ResponseEntity<?> verReportes(@PathVariable Integer id) {
         List<Reporte> reportes = tiendaService.verReportes(id);
@@ -135,7 +132,6 @@ public class TiendaController {
         if (reportes.isEmpty()) {
             return ResponseEntity.badRequest().body("Esta tienda no tiene ningun reporte");
         }
-
         return ResponseEntity.ok(reportes);
     }
 }
