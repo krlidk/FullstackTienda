@@ -18,6 +18,7 @@ public class TiendaService {
     @Autowired
     TiendaRespository tiendaRespository;
 
+    // ver lista de tiendas
     public List<Tienda> listarTiendas() {
         return tiendaRespository.findAll();
     }

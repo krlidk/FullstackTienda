@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
-
 @RestController
 @RequestMapping("/api/v1/pedidos") // URL base para el controlador de pedidos http://localhost:8080/api/v1/pedidos
 public class PedidoController {
@@ -26,35 +23,35 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    //Listar todos los métodos HTTP del controlador
+    // Listar todos los métodos HTTP del controlador
     @GetMapping
     public ResponseEntity<List<String>> listarMetodosDisponibles() {
         List<String> metodos = List.of(
-            "GET /api/v1/pedidos - Lista los métodos disponibles",
-            "GET /api/v1/pedidos/listar - Lista todos los pedidos",
-            "GET /api/v1/pedidos/buscar - Busca un pedido por ID",
-            "GET /api/v1/pedidos/buscarPorTienda - Busca pedidos por ID de tienda",
-            "GET /api/v1/pedidos/buscarPorCliente - Busca pedidos por nombre de cliente",
-            "GET /api/v1/pedidos/buscarPorEstado - Busca pedidos por estado de pedido",
-            "GET /api/v1/pedidos/buscarPorFecha - Busca pedidos por fecha de pedido",
-            "GET /api/v1/pedidos/buscarPorRangoPrecios - Busca pedidos por rango de precios",
-            "POST /api/v1/pedidos/ingresar - Ingresa un nuevo pedido",
-            "PUT /api/v1/pedidos/actualizar - Modifica un pedido existente",
-            "DELETE /api/v1/pedidos/eliminar - Elimina un pedido"
-            
+                "GET /api/v1/pedidos - Lista los métodos disponibles",
+                "GET /api/v1/pedidos/listar - Lista todos los pedidos",
+                "GET /api/v1/pedidos/buscar - Busca un pedido por ID",
+                "GET /api/v1/pedidos/buscarPorTienda - Busca pedidos por ID de tienda",
+                "GET /api/v1/pedidos/buscarPorCliente - Busca pedidos por nombre de cliente",
+                "GET /api/v1/pedidos/buscarPorEstado - Busca pedidos por estado de pedido",
+                "GET /api/v1/pedidos/buscarPorFecha - Busca pedidos por fecha de pedido",
+                "GET /api/v1/pedidos/buscarPorRangoPrecios - Busca pedidos por rango de precios",
+                "POST /api/v1/pedidos/ingresar - Ingresa un nuevo pedido",
+                "PUT /api/v1/pedidos/actualizar - Modifica un pedido existente",
+                "DELETE /api/v1/pedidos/eliminar - Elimina un pedido"
 
         );
-    return ResponseEntity.ok(metodos);
+        return ResponseEntity.ok(metodos);
     }
 
-    //Listar todos los pedidos
+    // Listar todos los pedidos
     @GetMapping("/listar")
     public ResponseEntity<List<Pedido>> listarPedidos() {
         List<Pedido> pedidos = pedidoService.listarPedidos();
         return ResponseEntity.ok(pedidos);
     }
 
-    //Ingresa un pedido nuevo se completa el totalPedido y no hay que poner id en el body
+    // Ingresa un pedido nuevo se completa el totalPedido y no hay que poner id en
+    // el body
     @PostMapping("/ingresar")
     public ResponseEntity<Pedido> crearPedido(@RequestBody Pedido pedido) {
         // Si el pedido trae un idPedido, verificar si ya existe
@@ -72,7 +69,7 @@ public class PedidoController {
         return ResponseEntity.ok(nuevoPedido);
     }
 
-    //Modificar un pedido ya existente
+    // Modificar un pedido ya existente
     @PutMapping("/actualizar/{idPedido}")
     public ResponseEntity<Pedido> modificarPedido(@PathVariable Integer idPedido, @RequestBody Pedido pedido) {
         Pedido pedidoExistente = pedidoService.buscarPedido(idPedido);
@@ -85,8 +82,8 @@ public class PedidoController {
             return ResponseEntity.notFound().build();
         }
     }
-    
-    //Eliminar un pedido
+
+    // Eliminar un pedido
     @DeleteMapping("/eliminar/{idPedido}")
     public ResponseEntity<Void> eliminarPedido(@PathVariable Integer idPedido) {
         Pedido pedidoExistente = pedidoService.buscarPedido(idPedido);
@@ -98,7 +95,7 @@ public class PedidoController {
         }
     }
 
-    //Buscar un pedido por ID de pedido
+    // Buscar un pedido por ID de pedido
     @GetMapping("/buscar/{idPedido}")
     public ResponseEntity<Pedido> buscarPedido(@PathVariable Integer idPedido) {
         Pedido pedido = pedidoService.buscarPedido(idPedido);
@@ -109,7 +106,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedido);
     }
 
-    //Buscar pedidos por ID de tienda
+    // Buscar pedidos por ID de tienda
     @GetMapping("/buscarPorTienda/{idTienda}")
     public ResponseEntity<List<Pedido>> buscarPedidosPorTienda(@PathVariable Integer idTienda) {
         List<Pedido> pedidos = pedidoService.buscarPedidosPorTienda(idTienda);
@@ -120,7 +117,7 @@ public class PedidoController {
         }
     }
 
-    //Buscar pedidos por nombre de cliente
+    // Buscar pedidos por nombre de cliente
     @GetMapping("/buscarPorCliente/{nombreCliente}")
     public ResponseEntity<List<Pedido>> buscarPedidosPorCliente(@PathVariable String nombreCliente) {
         List<Pedido> pedidos = pedidoService.buscarPedidosPorCliente(nombreCliente);
@@ -129,9 +126,9 @@ public class PedidoController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }   
+    }
 
-    //Buscar pedidos por estado de pedido
+    // Buscar pedidos por estado de pedido
     @GetMapping("/buscarPorEstado/{estadoPedido}")
     public ResponseEntity<List<Pedido>> buscarPedidosPorEstado(@PathVariable String estadoPedido) {
         List<Pedido> pedidos = pedidoService.buscarPedidosPorEstado(estadoPedido);
@@ -142,7 +139,7 @@ public class PedidoController {
         }
     }
 
-    //Buscar pedidos por fecha de pedido
+    // Buscar pedidos por fecha de pedido
     @GetMapping("/buscarPorFecha/{fechaPedido}")
     public ResponseEntity<List<Pedido>> buscarPedidosPorFecha(@PathVariable String fechaPedido) {
         List<Pedido> pedidos = pedidoService.buscarPedidosPorFecha(fechaPedido);
@@ -153,9 +150,10 @@ public class PedidoController {
         }
     }
 
-    //Buscar pedidos por rango de precios
+    // Buscar pedidos por rango de precios
     @GetMapping("/buscarPorRangoPrecios/{precioMin}/{precioMax}")
-    public ResponseEntity<List<Pedido>> buscarPedidosPorRangoPrecios(@PathVariable Double precioMin, @PathVariable Double precioMax) {
+    public ResponseEntity<List<Pedido>> buscarPedidosPorRangoPrecios(@PathVariable Double precioMin,
+            @PathVariable Double precioMax) {
         List<Pedido> pedidos = pedidoService.buscarPedidosPorRangoPrecios(precioMin, precioMax);
         if (!pedidos.isEmpty()) {
             return ResponseEntity.ok(pedidos);
