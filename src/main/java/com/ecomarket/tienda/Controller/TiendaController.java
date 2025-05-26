@@ -35,6 +35,8 @@ public class TiendaController {
                 "GET    http://localhost:8080/api/v1/tienda/buscarDireccion/{direccion}",
                 "GET    http://localhost:8080/api/v1/tienda/verPedidos/{id}",
                 "GET    http://localhost:8080/api/v1/tienda/verReportes/{id}",
+                "POST   http://localhost:8080/api/v1/tienda/guardar",
+                "PUT    http://localhost:8080/api/v1/tienda/modificar/{id}",
                 "DELETE http://localhost:8080/api/v1/tienda/borrar/{id}"
                 );
 
