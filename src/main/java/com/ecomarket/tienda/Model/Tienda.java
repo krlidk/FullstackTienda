@@ -28,13 +28,16 @@ public class Tienda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTienda;
+    
 
     @Column(nullable = false)
     private String nombreTienda;
 
     @Column(nullable = false)
     private String direccionTienda;
-
+    
+    
+    
     @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Reporte> reportes;
@@ -44,4 +47,7 @@ public class Tienda {
     @JsonIgnore
     private List<Pedido> pedidos; 
     // Relación con la entidad Pedido
+
+
+    
 }
