@@ -43,7 +43,7 @@ private String fechaReporte;
 
 @JsonIgnoreProperties
 @ManyToOne
-@JoinColumn(name = "id_tienda", nullable = false)
+@JoinColumn(name = "idTienda", nullable = false)
 private Tienda tienda;
 // Relación con la entidad Tienda
 }
