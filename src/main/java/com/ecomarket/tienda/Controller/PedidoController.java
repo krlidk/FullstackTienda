@@ -29,15 +29,15 @@ public class PedidoController {
         List<String> metodos = List.of(
                 "GET /api/v1/pedidos - Lista los métodos disponibles",
                 "GET /api/v1/pedidos/listar - Lista todos los pedidos",
-                "GET /api/v1/pedidos/buscar - Busca un pedido por ID",
-                "GET /api/v1/pedidos/buscarPorTienda - Busca pedidos por ID de tienda",
-                "GET /api/v1/pedidos/buscarPorCliente - Busca pedidos por nombre de cliente",
-                "GET /api/v1/pedidos/buscarPorEstado - Busca pedidos por estado de pedido",
-                "GET /api/v1/pedidos/buscarPorFecha - Busca pedidos por fecha de pedido",
-                "GET /api/v1/pedidos/buscarPorRangoPrecios - Busca pedidos por rango de precios",
+                "GET /api/v1/pedidos/buscar/{idPedido} - Busca un pedido por ID",
+                "GET /api/v1/pedidos/buscarPorTienda/{idTienda} - Busca pedidos por ID de tienda",
+                "GET /api/v1/pedidos/buscarPorCliente/{nombreCliente} - Busca pedidos por nombre de cliente",
+                "GET /api/v1/pedidos/buscarPorEstado/{estadoPedido} - Busca pedidos por estado de pedido",
+                "GET /api/v1/pedidos/buscarPorFecha/{fechaPedido} - Busca pedidos por fecha de pedido",
+                "GET /api/v1/pedidos/buscarPorRangoPrecios/{precioMin}/{precioMax} - Busca pedidos por rango de precios",
                 "POST /api/v1/pedidos/ingresar - Ingresa un nuevo pedido",
-                "PUT /api/v1/pedidos/actualizar - Modifica un pedido existente",
-                "DELETE /api/v1/pedidos/eliminar - Elimina un pedido"
+                "PUT /api/v1/pedidos/actualizar/{idPedido} - Modifica un pedido existente",
+                "DELETE /api/v1/pedidos/eliminar/{idPedido} - Elimina un pedido"
 
         );
         return ResponseEntity.ok(metodos);
